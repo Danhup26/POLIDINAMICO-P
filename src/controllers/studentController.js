@@ -64,5 +64,18 @@ const registerStudent = (req, res) => {
     });
 };
 
-module.exports = { registerStudent }; // Exporta la función
+// Función para obtener todos los estudiantes
+const obtenerEstudiantes = (req, res) => {
+    const query = 'SELECT e.cedula, e.nombres, e.correo, u.usuario, u.estado FROM estudiante e JOIN usuario u ON e.cedula = u.cedula';
 
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los estudiantes: ', err);
+            return res.status(500).json({ message: 'Error al obtener los estudiantes' });
+        }
+        return res.json(results);  // Devuelve los resultados como JSON
+    });
+};
+module.exports = { registerStudent,
+                   obtenerEstudiantes
+ }; 

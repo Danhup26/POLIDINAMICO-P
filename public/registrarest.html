@@ -89,32 +89,32 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Función para cargar los estudiantes
-        function cargarEstudiantes() {
-            $.get('/api/estudiantes', function(data) {
-                let estudiantesHTML = '';
-                data.forEach(estudiante => {
-                    estudiantesHTML += `
-                        <tr>
-                            <td>${estudiante.cedula}</td>
-                            <td>${estudiante.nombres}</td>
-                            <td>${estudiante.correo}</td>
-                            <td>${estudiante.usuario}</td>
-                            <td>${estudiante.estado}</td>
-                            <td>
-                                <button class="btn btn-danger" onclick="eliminarEstudiante('${estudiante.cedula}')">Eliminar</button>
-                            </td>
-                        </tr>
-                    `;
+            function cargarEstudiantes() {
+                $.get('/api/estudiantes', function(data) {
+                    let estudiantesHTML = '';
+                    data.forEach(estudiante => {
+                        estudiantesHTML += `
+                            <tr>
+                                <td>${estudiante.cedula}</td>
+                                <td>${estudiante.nombres}</td>
+                                <td>${estudiante.correo}</td>
+                                <td>${estudiante.usuario}</td>
+                                <td>${estudiante.estado}</td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="eliminarEstudiante('${estudiante.cedula}')">Eliminar</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    $('#tablaEstudiantes').html(estudiantesHTML);
                 });
-                $('#tablaEstudiantes').html(estudiantesHTML);
-            });
-        }
+            }
 
-        // Llamar a la función para cargar los estudiantes al cargar la página
-        $(document).ready(function() {
-            cargarEstudiantes();
-        });
-    </script>
+            // Llamar a la función para cargar los estudiantes al cargar la página
+            $(document).ready(function() {
+                cargarEstudiantes();
+            });
+            </script>
 </body>
 </html>
 

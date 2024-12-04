@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const studentRoutes = require('../src/routes/student');
+const authController = require('../src/controllers/authController');
+const authRoutes = require('../src/routes/auth');
 const app = express();
 const port = 3000;
 const cors = require('cors');
@@ -10,6 +12,16 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.post('/login', authController.login); //Ruta para el login
+
+// Ruta para el home (después de iniciar sesión)
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'home.html'));
+});
+
+// Usa las rutas de autenticación
+app.use('/auth', authRoutes);
 
 // Usar las rutas de estudiantes
 app.use('/api/estudiantes', studentRoutes);

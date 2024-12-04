@@ -76,6 +76,8 @@ const obtenerEstudiantes = (req, res) => {
         return res.json(results);  // Devuelve los resultados como JSON
     });
 };
+
+
 module.exports = { registerStudent,
                    obtenerEstudiantes
  }; 

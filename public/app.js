@@ -4,6 +4,8 @@ const path = require('path');
 const studentRoutes = require('../src/routes/student');
 const authController = require('../src/controllers/authController');
 const authRoutes = require('../src/routes/auth');
+const newPasswordRoute = require('../src/routes/newpassword');
+const { sequelize } = require('../models'); 
 const app = express();
 const port = 3000;
 const cors = require('cors');
@@ -19,6 +21,9 @@ app.post('/login', authController.login); //Ruta para el login
 app.get('/home', (req, res) => {
     res.sendFile(path.join(__dirname, 'home.html'));
 });
+
+// Ruta para restablecer contraseña
+app.use('/restablecer', newPasswordRoute);
 
 // Usa las rutas de autenticación
 app.use('/auth', authRoutes);

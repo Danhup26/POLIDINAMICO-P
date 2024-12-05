@@ -49,13 +49,23 @@ router.post('/validar-cedula', async (req, res) => {
       }
     });
 
-    // Enviar correo con la nueva contraseña
-    await transporter.sendMail({
-      from: 'dani.phinno11@gmail.com',
-      to: estudiante.correo, // Correo obtenido del estudiante
-      subject: 'Restablecimiento de contraseña',
-      text: `Hola, ${estudiante.nombres}. Tu nueva contraseña es: ${nuevaContrasena}`
-    });
+// Enviar correo con la nueva contraseña
+await transporter.sendMail({
+    from: 'dani.phinno11@gmail.com',
+    to: estudiante.correo, // Correo obtenido del estudiante
+    subject: 'Restablecimiento de Contraseña POLIDINAMICO',
+    text: `Hola, ${estudiante.nombres},
+  
+  Te informamos que tu contraseña para acceder a la plataforma POLIDINAMICO ha sido restablecida con éxito. Tu nueva contraseña es: ${nuevaContrasena}.
+  
+  Por razones de seguridad, te recomendamos cambiar esta contraseña una vez ingreses a tu cuenta. Si no solicitaste este cambio, por favor, contacta con el soporte técnico de inmediato.
+  
+  Si tienes alguna pregunta o necesitas ayuda adicional, no dudes en comunicarte con nosotros.
+  
+  Saludos cordiales,
+  El equipo de POLIDINAMICO`
+  });
+  
 
     res.status(200).send('Nueva contraseña generada y enviada por correo');
   } catch (error) {
